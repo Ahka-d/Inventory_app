@@ -1,5 +1,3 @@
-const dotenv = require("dotenv")
-dotenv.config();
 const defineConfig = require("prisma/config").defineConfig;
 const env = require("prisma/config").env;
 module.exports = defineConfig({
