@@ -12,23 +12,24 @@ CREATE TABLE "Session" (
 CREATE TABLE "user" (
     "id" TEXT NOT NULL,
     "username" VARCHAR(255) NOT NULL,
-    "password" VARCHAR(255) NOT NULL,
+    "password" TEXT NOT NULL,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "classification" (
+CREATE TABLE "category" (
     "id" SERIAL NOT NULL,
-    "category" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
 
-    CONSTRAINT "classification_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "category_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "item" (
     "item_id" TEXT NOT NULL,
-    "categoryId" INTEGER NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "category_id" INTEGER NOT NULL,
     "description" TEXT NOT NULL,
 
     CONSTRAINT "item_pkey" PRIMARY KEY ("item_id")
@@ -40,5 +41,11 @@ CREATE UNIQUE INDEX "Session_sid_key" ON "Session"("sid");
 -- CreateIndex
 CREATE UNIQUE INDEX "user_username_key" ON "user"("username");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "category_name_key" ON "category"("name");
+
 -- AddForeignKey
-ALTER TABLE "item" ADD CONSTRAINT "item_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "classification"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "item" ADD CONSTRAINT "item_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "item" ADD CONSTRAINT "item_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

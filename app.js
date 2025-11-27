@@ -5,6 +5,7 @@ const passport = require("./src/passport.js");
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { PrismaClient } = require("./generated/prisma/client");
 
+
 const invRouter = require("./routes/invRouter.js");
 require("dotenv").config()
 const app = express();
@@ -51,5 +52,5 @@ app.listen(process.env.PORT||3000, (error) => {
   if (error) {
     throw error;
   }
-  console.log("app listening on port 3000!");
+  console.log(`app listening on port ${process.env.PORT || 3000}!`);
 });
