@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="min-h-screen p-6 bg-gray-900 text-white">
+  <%- include('partials/header') %>
+  <form action="/sign-up" class="form-group" method="POST">
+    <article class="flex flex-col justify-center gap-2 w-64 mx-auto">
+      <label for="username">Username</label>
+      <input id="username" name="username" placeholder="username" type="text" class="border rounded px-1 " />
+      <label for="password">Password</label>
+      <input id="password" name="password" placeholder="password" type="password" class="border rounded px-1 " />
+      <button type="submit" class="my-1 self-center rounded bg-blue-400 px-2 py-1">Sign Up</button>
+    </article>
+  </form>
+</body>
+</html>

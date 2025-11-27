@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="min-h-screen p-6 bg-gray-900 text-white">
+  <%- include('../partials/header') %>
+  <div>
+    <div class="flex flex-col justify-center items-center">
+      <h1 class="text-fuchsia-200 text-3xl font-extrabold"><%= title %></h1>
+      <p>Update the product details below</p>
+    </div>
+    
+    <%- include('../partials/options') %>
+    
+    <div class="flex gap-2 justify-center">
+      <form action="/update-product/<%= item.item_id %>" method="POST" class="flex flex-col gap-4 items-center">
+        <div class="mb-4">
+          <label for="category">Category:</label>
+          <% const options = ['Electronics', 'Apparel', 'Home Goods']; %>
+          <select name="category" id="category" required class="bg-gray-700 rounded px-1 py-0.5">
+            <% options.forEach((option, index) => { %>
+              <% if(item.category_id === index + 1) { %>
+                <option value="<%= index + 1 %>" selected><%= option %></option>
+              <% } else { %>
+                <option value="<%= index + 1 %>"><%= option %></option>
+              <% } %>
+            <% }); %>
+          </select>
+        </div>
+        
+        <div>
+          <label for="description">Product Description:</label>
+          <input type="text" name="description" id="description" value="<%= item.description %>" placeholder="Enter product description..." required class="border bg-gray-700 rounded px-1 py-0.5">
+        </div>
+        
+        <div class="flex gap-2 justify-center">
+          <button type="submit" class="self-center rounded bg-green-400 px-2 py-1">Update Product</button>
+          <a href="/" class="self-center rounded bg-red-400 px-2 py-1">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

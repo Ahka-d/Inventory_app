@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="min-h-screen p-6 bg-gray-900 text-white">
+  <%- include('../partials/header') %>
+  <h1><%= title %></h1>
+  <section>
+  <% if (locals.item) {%>
+      <p>Category: <span><%= item.category %></span> / Product: <span><%= item.description %></span></p>
+  <% } %>
+  </section>
+</body>
+</html>    

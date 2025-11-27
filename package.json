@@ -1,0 +1,37 @@
+{
+  "name": "file_uploader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "--watch app.js",
+    "start": "node app.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "build:css": "postcss public/css/styles.css -o public/style.css",
+    "dev:css": "postcss public/css/styles.css -o public/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "@quixo3/prisma-session-store": "^3.1.13",
+    "@tailwindcss/postcss": "^4.1.17",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "prisma": "^6.19.0"
+  },
+  "description": ""
+}
