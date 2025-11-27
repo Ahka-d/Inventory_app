@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.19.0",
     "@quixo3/prisma-session-store": "^3.1.13",
     "@tailwindcss/postcss": "^4.1.17",
     "bcryptjs": "^3.0.2",
@@ -30,7 +31,6 @@
   },
   "devDependencies": {
     "@prisma/adapter-pg": "^7.0.1",
-    "@prisma/client": "^6.19.0",
     "autoprefixer": "^10.4.22",
     "pg": "^8.16.3",
     "postcss": "^8.5.6",
