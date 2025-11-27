@@ -8,7 +8,11 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "build:css": "postcss public/css/styles.css -o public/style.css",
-    "dev:css": "postcss public/css/styles.css -o public/style.css --watch"
+    "dev:css": "postcss public/css/styles.css -o public/style.css --watch",
+    "seed": "node prisma/seed.js"
+  },
+  "prisma": {
+  "seed": "node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
