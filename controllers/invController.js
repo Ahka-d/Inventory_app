@@ -4,7 +4,6 @@ const connection = require('../connection.js');
 const crypto = require('crypto');
 const { console } = require("inspector");
 
-
 // pagina de inicio
 exports.home = async(req, res, next) => {
   try {

@@ -10,11 +10,14 @@ const invRouter = require("./routes/invRouter.js");
 require("dotenv").config()
 const app = express();
 
+app.set('trust proxy', 1);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 const secretK = process.env.SECRET_KEY || "asqGAhhsdq32A54gfsdsa"
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
     cookie: {
@@ -38,14 +41,10 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use((req, res, next) =>{
     res.locals.currentUser = req.user;
     next();
 })
-
 app.use("/", invRouter)
 
 app.listen(process.env.PORT||3000, (error) => {
