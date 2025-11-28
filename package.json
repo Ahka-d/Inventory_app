@@ -13,8 +13,8 @@
     "seed-and-start": "npx prisma migrate deploy && npx prisma db seed && npm run start"
   },
   "prisma": {
-  "seed": "node prisma/seed.js"
-},
+    "seed": "node prisma/seed.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -38,7 +38,8 @@
     "autoprefixer": "^10.4.22",
     "pg": "^8.16.3",
     "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1"
+    "postcss-cli": "^11.0.1",
+    "tsx": "^4.20.6"
   },
   "description": ""
 }
