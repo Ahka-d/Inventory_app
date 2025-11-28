@@ -1,4 +1,6 @@
 <div class="flex justify-center gap-4 my-4">
     <a href="/" class="text-black font-semibold bg-blue-500 rounded p-0.5 px-1">📋 List View</a>
-        <a href="/create-product" class="text-black font-semibold bg-green-400 rounded p-0.5 px-1">➕ Add Product</a>
+      <% if (locals.currentUser) { %>
+    <a href="/create-product" class="text-black font-semibold bg-green-400 rounded p-0.5 px-1">➕ Add Product</a>
+      <% } %>
 </div>
