@@ -1,10 +1,10 @@
 const path = require("node:path");
 const express = require("express");
 const session = require('express-session');
-const passport = require("./src/passport.js");
+const passport = require("./lib/passport.js");
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { PrismaClient } = require("./generated/prisma/client");
-
+const errorMiddleware = require('./middlewares/errorMiddleware');
 
 const invRouter = require("./routes/invRouter.js");
 require("dotenv").config()
@@ -14,7 +14,7 @@ app.set('trust proxy', 1);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-const secretK = process.env.SECRET_KEY || "asqGAhhsdq32A54gfsdsa"
+const secretK = process.env.SECRET_KEY
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -46,6 +46,7 @@ app.use((req, res, next) =>{
     next();
 })
 app.use("/", invRouter)
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT||3000, (error) => {
   if (error) {

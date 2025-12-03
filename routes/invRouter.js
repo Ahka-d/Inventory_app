@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const invController = require("../controllers/invController.js")
 const invRouter = Router()
-const { validateUser } = require("../src/validator.js");
+const { validateUser } = require("../lib/validator.js");
 
 invRouter.get("/", invController.home);
 invRouter.get("/sign-up", invController.getSignUp);

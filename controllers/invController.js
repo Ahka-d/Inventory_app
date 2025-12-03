@@ -1,8 +1,9 @@
-const passport = require("../src/passport.js");
-const encrypt = require('../src/encrypt.js');
+const passport = require("../lib/passport.js");
+const encrypt = require('../lib/encrypt.js');
 const connection = require('../connection.js');
 const crypto = require('crypto');
 const { console } = require("inspector");
+const ErrorWrapper = require("../utils/errorWrapper.js");
 
 // pagina de inicio
 exports.home = async(req, res, next) => {
@@ -26,7 +27,7 @@ exports.postSignUp = async (req, res, next) => {
   const sameName = await connection.$queryRaw`SELECT * FROM "user" WHERE username = ${req.body.username}`
   const id = crypto.randomUUID();
   if(sameName[0]){
-   throw new Error("Nombre de usuario usado, intente con otro");
+   throw new ErrorWrapper("Nombre de usuario usado, intente con otro", 400);
   }
   await connection.user.create({
    data: {
@@ -35,7 +36,7 @@ exports.postSignUp = async (req, res, next) => {
       password:hashedPassword
    }
   })
-   res.redirect("/");
+   this.postLogIn(req, res, next);
  } catch (error) {
     console.error(error);
     next(error);
@@ -51,10 +52,15 @@ exports.postLogIn = passport.authenticate("local", {
 // cerrar sesion
 exports.getLogOut = (req, res, next) => {
   req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
+    try{
+      if (err) {
+        throw new ErrorWrapper("Error al cerrar sesión", 500);
+      }
+      res.redirect("/");
+    } catch (error) {
+    console.error(error);
+    next(error);
+   }
   });
 }
 // leer producto unico
@@ -67,7 +73,8 @@ exports.getShowunique = async (req,res,next)=>{
     })
     } catch (error) {
     console.error(error);
-    next(error);
+    const err = new ErrorWrapper("Error al obtener el producto", 500);
+    next(err);
    }
 }
 // crear producto
@@ -83,11 +90,11 @@ exports.postCreateProduct = async (req,res,next)=>{
     const item_id = crypto.randomUUID();
     
     if(!req.user || !req.user.id){
-      throw new Error("Usuario no autenticado");
+      throw new ErrorWrapper("Usuario no autenticado", 401);
     }
     
     if(!description || !category){
-      throw new Error("Faltan datos obligatorios");
+      throw new ErrorWrapper("Faltan datos obligatorios", 400);
     }
     await connection.item.create({
         data: {
@@ -117,8 +124,9 @@ exports.getUpdateProduct = async (req,res,next)=>{
         item: item   
     })
     } catch (error) {
+    const err = new ErrorWrapper("Error al obtener el producto", 500);
     console.error(error);
-    next(error);
+    next(err);
    }  
 }
 // procesar actualizacion de producto
@@ -137,8 +145,9 @@ exports.postUpdateProduct = async (req,res,next)=>{
     });
     res.redirect("/")
     } catch (error) {
+    const err = new ErrorWrapper("Error al actualizar el producto", 500);
     console.error(error);
-    next(error);
+    next(err);
    }
 }
 // eliminar producto
@@ -152,7 +161,8 @@ exports.getDeleteProduct = async (req,res,next)=>{
     });
     res.redirect("/")
     } catch (error) {
+    const err = new ErrorWrapper("Error al eliminar el producto", 500);
     console.error(error);
-    next(error);
+    next(err);
    }
 }

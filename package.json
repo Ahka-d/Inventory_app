@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "--watch app.js",
+    "dev": "cross-env NODE_ENV=development node --watch app.js",
+    "prod": "cross-env NODE_ENV=production node app.js",
     "start": "node app.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@prisma/adapter-pg": "^7.0.1",
     "autoprefixer": "^10.4.22",
+    "cross-env": "^10.1.0",
     "pg": "^8.16.3",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
